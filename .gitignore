@@ -1,0 +1,9 @@
+Gemfile.lock
+yarn.lock
+node_modules
+public
+tmp
+storage
+.idea
+/.bundle
+log
