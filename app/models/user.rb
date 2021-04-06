@@ -11,4 +11,7 @@ class User < ApplicationRecord
 
   has_one_attached :photo
   has_many :posts
+  has_many :like_posts
+  has_many :_like_posts, through: :like_posts, class_name: "Post", source: :post
+
 end
