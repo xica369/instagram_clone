@@ -5,17 +5,17 @@
 
     div.flex.flex-col
       .mt-8.sm:mx-auto.sm:w-full.sm:max-w-md.flex.flex-col.justify-end.items-stretch
-        .bg-white.py-8.px-4.shadow.sm:rounded-lg.sm:px-10
+        .bg-white.py-8.px-4.shadow.sm:rounded-lg.sm:px-10.border.border-gray-200
 
           div.text-center.mt-3.mb-10
             img.inline.h-16 [src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" alt="Workflow logo"]
 
           = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
             .field
-              = f.email_field :email, autofocus: true, autocomplete: "email", class: "block w-full mb-2 p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent text-xs text-opacity-75", placeholder: "Email"
+              = f.email_field :email, autofocus: true, autocomplete: "email", class: "block w-full mb-2 p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent text-xs text-opacity-75 bg-gray-50", placeholder: "Email"
 
             .field
-              = f.password_field :password, autocomplete: "current-password", class: "block w-full mb-2 p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent text-xs text-opacity-75", placeholder: "Password"
+              = f.password_field :password, autocomplete: "current-password", class: "block w-full mb-2 p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent text-xs text-opacity-75 bg-gray-50", placeholder: "Password"
 
             .actions
               = f.submit "Log In", class:"group relative w-full flex justify-center mt-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -24,7 +24,7 @@
             div.text-center.mt-5
               = link_to "Forgot password?", new_user_password_path, class: "mt-2 text-xs text-gray-600 max-w hover:bg-transparent hover:text-gray-600"
 
-        .bg-white.py-5.px-5.shadow.sm:rounded-lg.sm:px-10.mt-5
+        .bg-white.py-5.px-5.shadow.sm:rounded-lg.sm:px-10.mt-5.border.border-gray-200
           div.text-center
             span.mt-2.text-sm.font-light
               | Don't have an account?

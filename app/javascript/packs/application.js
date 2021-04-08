@@ -5,8 +5,8 @@
 
 import Rails from "@rails/ujs"
 Rails.start()
-import { Turbo, cable } from "@hotwired/turbo-rails"
-window.Turbo = Turbo
+// import { Turbo, cable } from "@hotwired/turbo-rails"
+// window.Turbo = Turbo
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "../css/application.css"

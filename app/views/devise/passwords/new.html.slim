@@ -1,11 +1,38 @@
-h2
-  | Forgot your password?
-= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .actions
-    = f.submit "Send me reset password instructions"
-= render "devise/shared/links"
+/ | Forgot your password?
+.min-h-screen.bg-gray-50.flex.flex-row.justify-end.py-12.sm:px-6.lg:px-8
+  .sm:mx-auto.sm:w-full.sm:max-w-md
+
+    div.flex.flex-col
+      .mt-8.sm:mx-auto.sm:w-full.sm:max-w-md.flex.flex-col.justify-end.items-stretch
+        .bg-white.py-8.px-4.shadow.sm:rounded-lg.sm:px-10.pb-20.border.border-gray-200
+          div.flex.justify-center
+            .rounded-full.h-28.w-28.flex.items-center.justify-center.bg-white.border-2.border-black
+              div[style="font-size: 4rem;"]
+                i.fas.fa-lock
+          p.mt-2.text-center.text-base.max-w.font-medium
+            | Truble Logging In?
+          p.mt-2.text-center.text-sm.text-gray-600.max-w.text-opacity-75
+            | Enter your email and we'll send you a link
+            br
+            | to get back into your account.
+            / - byebug
+          = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+            = render "devise/shared/error_messages", resource: resource
+
+            .field
+              = f.email_field :email, autofocus: true, autocomplete: "email", class: "block w-full my-4 p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent text-xs text-opacity-75 bg-gray-50", placeholder: "Email"
+
+            .actions
+              = f.submit "Send me reset password instructions", class:"group relative w-full flex justify-center my-5 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+
+            div.text-center.mt-3.mb-3.text-lg.text-gray-600.max-w.text-opacity-75.flex.items-center
+              hr.text-left.w-1/2.mr-3
+              p.text-xs.font-medium
+                | OR
+              hr.text-right.w-1/2.ml-3
+
+            div.text-center
+              = link_to "Create New Account", new_user_registration_path
+        .bg-white.py-5.px-5.shadow.sm:rounded-lg.sm:px-10.bg-gray-50.border.border-gray-200
+          div.text-center
+            = link_to "Back To Login", new_user_session_path
