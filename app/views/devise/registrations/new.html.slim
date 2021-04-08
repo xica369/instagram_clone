@@ -1,35 +1,52 @@
 .min-h-screen.bg-gray-50.flex.flex-row.justify-end.py-12.sm:px-6.lg:px-8
   .sm:mx-auto.sm:w-full.sm:max-w-md
 
+    div.flex.flex-col
+      .mt-8.sm:mx-auto.sm:w-full.sm:max-w-md.flex.flex-col.justify-end.items-stretch
+        .bg-white.py-8.px-4.shadow.sm:rounded-lg.sm:px-10
 
-    .mt-8.sm:mx-auto.sm:w-full.sm:max-w-md
-      .bg-white.py-8.px-4.shadow.sm:rounded-lg.sm:px-10
+          / h2.mt-6.text-center.text-3xl.font-extrabold.text-gray-900
+          /   | Sign up
 
-        h2.mt-6.text-center.text-3xl.font-extrabold.text-gray-900
-          | Sign up
-        h2.mt-6.text-center.text-3xl.font-extrabold.text-gray-900
-          | Instagram
-        p.mt-2.text-center.text-sm.text-gray-600.max-w
-          | Regístrate para ver fotos y videos de tus amigos.
-        = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-          = render "devise/shared/error_messages", resource: resource
-          .field
-            = f.label :email
+          div.text-center.mt-3
+            img.inline.h-16 [src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" alt="Workflow logo"]
+          p.mt-2.text-center.text-base.text-gray-600.max-w.font-semibold.text-opacity-75
+            | Sign up to see photos and videos
             br
-            = f.email_field :email, autofocus: true, autocomplete: "email"
-          .field
-            = f.label :password
-            - if @minimum_password_length
-              em
-                | (
-                = @minimum_password_length
-                |  characters minimum)
-            br
-            = f.password_field :password, autocomplete: "new-password"
-          .field
-            = f.label :password_confirmation
-            br
-            = f.password_field :password_confirmation, autocomplete: "new-password"
-          .actions
-            = f.submit "Sign up"
-        = render "devise/shared/links"
+            | from your friends.
+          div.text-center.mt-3.mb-3.text-lg.text-gray-600.max-w.text-opacity-75.flex.items-center
+            hr.text-left.w-1/2.mr-3
+            |o
+            hr.text-right.w-1/2.ml-3
+          = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+            = render "devise/shared/error_messages", resource: resource
+            .field
+              = f.email_field :email, autofocus: true, autocomplete: "email", class:"block w-full mb-2 p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent text-xs text-opacity-75 text-gray-300 bg-gray-50", placeholder:"Email"
+
+            .field
+              = f.text_field :name, autocomplete: "name", class: "block w-full mb-2 p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent text-xs text-opacity-75 bg-gray-50", placeholder: "Full name"
+
+            .field
+              = f.text_field :username, autocomplete: "name", class: "block w-full mb-2 p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent text-xs text-opacity-75 bg-gray-50", placeholder: "Username"
+
+            .field
+              = f.password_field :password, autocomplete: "new-password", class:"block w-full mb-2 p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent text-xs text-opacity-75 bg-gray-50", placeholder:"Password"
+
+            .actions
+              = f.submit "Sign up", class:"group relative w-full flex justify-center my-5 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+
+            p.mt-2.text-center.text-xs.text-gray-600.max-w.text-opacity-75
+              | By signing up, you agree to our
+              strong
+                |  Terms, Data Policy
+              br
+              | and
+              strong
+                |  Cookies Policy
+
+        .bg-white.py-5.px-5.shadow.sm:rounded-lg.sm:px-10.mt-5
+          div.text-center
+            span.mt-2.text-sm.font-light
+             | Have an account?
+             strong
+              = link_to " Log in", new_user_session_path, class: "text-blue-500"
