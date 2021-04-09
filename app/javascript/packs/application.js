@@ -10,6 +10,7 @@ Rails.start()
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "../css/application.css"
+import "alpinejs"
 
 window.addEventListener('turbo:load', (event) =>{
     console.log("Turbo");
