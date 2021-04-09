@@ -11,7 +11,7 @@ css:
     }
   }
 
-.lg:w-8/12.lg:mx-auto.mb-8
+.lg:w-8/12.lg:mx-auto.mb-6
   nav.border-b.px-4.py-2.bg-white
     .flex.flex-wrap.items-center.justify-between
       img.h-10[src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/150px-Instagram_logo.svg.png" alt="instagram"]
@@ -23,7 +23,7 @@ css:
             .absolute.inset-y-0.left-0.pl-3.flex.items-center.pointer-events-none
               svg.h-5.w-5.text-gray-400[xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true"]
                 path[fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"]
-            input#search.max-w-xs.pl-10.pr-3.py-1.border.border-gray-300.rounded-md.leading-5.bg-white.placeholder-gray-500.focus:outline-none.focus:placeholder-gray-400.focus:ring-1.focus:ring-indigo-500.focus:border-indigo-500.sm:text-sm[name="search" placeholder="Search" type="search"]
+            input#search.max-w-xs.pl-10.pr-3.py-1.border.border-gray-300.rounded-md.leading-5.bg-white.placeholder-gray-500.focus:outline-none.focus:placeholder-gray-300.focus:ring-1.focus:ring-gray-300.focus:border-gray-300.sm:text-sm[name="search" placeholder="Search" type="search"]
       .flex.justify-items-end
         a[href="#"]
           div[style="font-size: 1.5rem;" class="ml-3 hover:border-none"]
@@ -42,10 +42,18 @@ css:
             i.far.fa-user
 
 main.bg-gray-100.bg-opacity-25
-  .lg:w-8/12.lg:mx-auto.mb-8
-    header.flex.flex-wrap.items-center.p-4.md:py-8
+  .lg:w-8/12.lg:mx-auto.mb-6
+    header.flex.flex-wrap.items-center.md:pb-8
+      / .md:w-3/12.md:ml-16
+      /   img.w-20.h-20.md:w-40.md:h-40.object-cover.rounded-full.border-2.border-pink-600.p-1[src="https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80" alt="profile"]
+
       .md:w-3/12.md:ml-16
-        img.w-20.h-20.md:w-40.md:h-40.object-cover.rounded-full.border-2.border-pink-600.p-1[src="https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80" alt="profile"]
+        a[href="#"]
+          - if current_user.photo.attached?
+            = image_tag current_user.photo, class: "w-20 h-20 md:w-40 md:h-40 object-cover rounded-full p-1"
+          - else
+              img.w-20.h-20.md:w-40.md:h-40.object-cover.rounded-full.p-1[src="https://images-na.ssl-images-amazon.com/images/I/51e6kpkyuIL._AC_SL1200_.jpg" alt="profile"]
+
       .w-8/12.md:w-7/12.ml-4
         .md:flex.md:flex-wrap.md:items-center.mb-4
           h2.text-3xl.inline-block.font-light.md:mr-2.mb-2.sm:mb-0
@@ -78,114 +86,111 @@ main.bg-gray-100.bg-opacity-25
           a.text-blue-800.font-semibold[href="#"]
             = current_user.website
 
-    .container x-data=("{ tab: 'tab1' }")
+    .container x-data=("{ tab: window.location.hash ? window.location.hash.substring(1) : 'posts' }")
       .px-px.md:px-3
         ul.flex.items-center.justify-around.md:justify-center.space-x-12.uppercase.tracking-widest.font-semibold.text-xs.text-gray-600.border-t
-          li.md:-mt-px.md:text-gray-600
-            a.inline-block.p-3[class="inline-block py-2 px-4 font-semibold" :class=("{ 'md:border-t md:border-gray-700' : tab === 'tab1' }") @click.prevent=("tab = 'tab1'") href="#" ]
+          li
+            a.inline-block.p-3[class="inline-block py-2 px-4 font-semibold" :class=("{ 'md:border-t md:border-gray-700' : tab === 'posts' }") @click.prevent=("tab = 'posts'; window.location.hash = 'posts'") href="#" ]
               i.fas.fa-border-all.text-xl.md:text-xs
               span.hidden.md:inline.ml-1
                 | posts
           li
-            a.inline-block.p-3[class="inline-block py-2 px-4 font-semibold" :class=("{ 'md:border-t md:border-gray-700' : tab === 'tab2' }") @click.prevent=("tab = 'tab2'") href="#"]
+            a.inline-block.p-3[class="inline-block py-2 px-4 font-semibold" :class=("{ 'md:border-t md:border-gray-700' : tab === 'igtv' }") @click.prevent=("tab = 'igtv'; window.location.hash = 'igtv'") href="#"]
               i.far.fa-square.text-xl.md:text-xs
               span.hidden.md:inline.ml-1
                 | igtv
           li
-            a.inline-block.p-3[class="inline-block py-2 px-4 font-semibold" :class=("{ 'md:border-t md:border-gray-700' : tab === 'tab3' }") @click.prevent=("tab = 'tab3'") href="#"]
+            a.inline-block.p-3[class="inline-block py-2 px-4 font-semibold" :class=("{ 'md:border-t md:border-gray-700' : tab === 'saved' }") @click.prevent=("tab = 'saved'; window.location.hash = 'saved'") href="#"]
               i.far.fa-bookmark.text-xl.md:text-xs
               span.hidden.md:inline.ml-1
                 | saved
           li
-            a.inline-block.p-3[class="inline-block py-2 px-4 font-semibold" :class=("{ 'md:border-t md:border-gray-700' : tab === 'tab4' }") @click.prevent=("tab = 'tab4'") href="#"]
+            a.inline-block.p-3[class="inline-block py-2 px-4 font-semibold" :class=("{ 'md:border-t md:border-gray-700' : tab === 'tagged' }") @click.prevent=("tab = 'tagged'; window.location.hash = 'tagged'") href="#"]
               i.far.fa-id-badge.text-xl.md:text-xs
               span.hidden.md:inline.ml-1
                 | tagged
 
         .content
-          div x-show=("tab === 'tab1'")
-            .flex.flex-wrap.-mx-px.md:-mx-3
+          div x-show=("tab === 'posts'")
+            .flex.flex-wrap.-mx-px.md:-mx-3.mt-3
               - current_user.posts.each do |post|
-                .w-1/3.p-px.md:px-3
-                  a[href="#"]
-                    article.post.bg-gray-100.text-white.relative.pb-full.md:mb-6
-                      / img.w-full.h-full.absolute.left-0.top-0.object-cover[src="https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="image"]
-                      = image_tag post.files.last, class: "w-full h-full absolute left-0 top-0"
-                      i.fas.fa-square.absolute.right-0.top-0.m-1
-                      .overlay.bg-gray-800.bg-opacity-25.w-full.h-full.absolute.left-0.top-0.hidden
-                        .flex.justify-center.items-center.space-x-4.h-full
-                          span.p-2
-                            i.fas.fa-heart
-                            |  412K
-                          span.p-2
-                            i.fas.fa-comment
-                            |  2,909
+                = render partial: "profile/posts/post", locals: {post:post}
 
+              / .w-1/3.p-px.md:px-3
+              /   a[href="#"]
+              /     article.post.bg-gray-100.text-white.relative.pb-full.md:mb-6
+              /       img.w-full.h-full.absolute.left-0.top-0.object-cover[src="https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="image"]
+              /       i.fas.fa-square.absolute.right-0.top-0.m-1
+              /       .overlay.bg-gray-800.bg-opacity-25.w-full.h-full.absolute.left-0.top-0.hidden
+              /         .flex.justify-center.items-center.space-x-4.h-full
+              /           span.p-2
+              /             i.fas.fa-heart
+              /             |  412K
+              /           span.p-2
+              /             i.fas.fa-comment
+              /             |  2,909
+              / .w-1/3.p-px.md:px-3
+              /   a[href="#"]
+              /     article.post.bg-gray-100.text-white.relative.pb-full.md:mb-6
+              /       img.w-full.h-full.absolute.left-0.top-0.object-cover[src="https://images.unsplash.com/photo-1498409570040-05bf6d3dd5b5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="image"]
+              /       .overlay.bg-gray-800.bg-opacity-25.w-full.h-full.absolute.left-0.top-0.hidden
+              /         .flex.justify-center.items-center.space-x-4.h-full
+              /           span.p-2
+              /             i.fas.fa-heart
+              /             |  412K
+              /           span.p-2
+              /             i.fas.fa-comment
+              /             |  1,993
+              / .w-1/3.p-px.md:px-3
+              /   a[href="#"]
+              /     article.post.bg-gray-100.text-white.relative.pb-full.md:mb-6
+              /       img.w-full.h-full.absolute.left-0.top-0.object-cover[src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="image"]
+              /       .overlay.bg-gray-800.bg-opacity-25.w-full.h-full.absolute.left-0.top-0.hidden
+              /         .flex.justify-center.items-center.space-x-4.h-full
+              /           span.p-2
+              /             i.fas.fa-heart
+              /             |  112K
+              /           span.p-2
+              /             i.fas.fa-comment
+              /             |  2,090
+              / .w-1/3.p-px.md:px-3
+              /   a[href="#"]
+              /     article.post.bg-gray-100.text-white.relative.pb-full.md:mb-6
+              /       img.w-full.h-full.absolute.left-0.top-0.object-cover[src="https://images.unsplash.com/photo-1533105079780-92b9be482077?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="image"]
+              /       i.fas.fa-video.absolute.right-0.top-0.m-1
+              /       .overlay.bg-gray-800.bg-opacity-25.w-full.h-full.absolute.left-0.top-0.hidden
+              /         .flex.justify-center.items-center.space-x-4.h-full
+              /           span.p-2
+              /             i.fas.fa-heart
+              /             |  841K
+              /           span.p-2
+              /             i.fas.fa-comment
+              /             |  909
+              / .w-1/3.p-px.md:px-3
+              /   a[href="#"]
+              /     article.post.bg-gray-100.text-white.relative.pb-full.md:mb-6
+              /       img.w-full.h-full.absolute.left-0.top-0.object-cover[src="https://images.unsplash.com/photo-1475688621402-4257c812d6db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80" alt="image"]
+              /       .overlay.bg-gray-800.bg-opacity-25.w-full.h-full.absolute.left-0.top-0.hidden
+              /         .flex.justify-center.items-center.space-x-4.h-full
+              /           span.p-2
+              /             i.fas.fa-heart
+              /             |  120K
+              /           span.p-2
+              /             i.fas.fa-comment
+              /             |  3,909
 
-              .w-1/3.p-px.md:px-3
-                a[href="#"]
-                  article.post.bg-gray-100.text-white.relative.pb-full.md:mb-6
-                    img.w-full.h-full.absolute.left-0.top-0.object-cover[src="https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="image"]
-                    i.fas.fa-square.absolute.right-0.top-0.m-1
-                    .overlay.bg-gray-800.bg-opacity-25.w-full.h-full.absolute.left-0.top-0.hidden
-                      .flex.justify-center.items-center.space-x-4.h-full
-                        span.p-2
-                          i.fas.fa-heart
-                          |  412K
-                        span.p-2
-                          i.fas.fa-comment
-                          |  2,909
-              .w-1/3.p-px.md:px-3
-                a[href="#"]
-                  article.post.bg-gray-100.text-white.relative.pb-full.md:mb-6
-                    img.w-full.h-full.absolute.left-0.top-0.object-cover[src="https://images.unsplash.com/photo-1498409570040-05bf6d3dd5b5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="image"]
-                    .overlay.bg-gray-800.bg-opacity-25.w-full.h-full.absolute.left-0.top-0.hidden
-                      .flex.justify-center.items-center.space-x-4.h-full
-                        span.p-2
-                          i.fas.fa-heart
-                          |  412K
-                        span.p-2
-                          i.fas.fa-comment
-                          |  1,993
-              .w-1/3.p-px.md:px-3
-                a[href="#"]
-                  article.post.bg-gray-100.text-white.relative.pb-full.md:mb-6
-                    img.w-full.h-full.absolute.left-0.top-0.object-cover[src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="image"]
-                    .overlay.bg-gray-800.bg-opacity-25.w-full.h-full.absolute.left-0.top-0.hidden
-                      .flex.justify-center.items-center.space-x-4.h-full
-                        span.p-2
-                          i.fas.fa-heart
-                          |  112K
-                        span.p-2
-                          i.fas.fa-comment
-                          |  2,090
-              .w-1/3.p-px.md:px-3
-                a[href="#"]
-                  article.post.bg-gray-100.text-white.relative.pb-full.md:mb-6
-                    img.w-full.h-full.absolute.left-0.top-0.object-cover[src="https://images.unsplash.com/photo-1533105079780-92b9be482077?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="image"]
-                    i.fas.fa-video.absolute.right-0.top-0.m-1
-                    .overlay.bg-gray-800.bg-opacity-25.w-full.h-full.absolute.left-0.top-0.hidden
-                      .flex.justify-center.items-center.space-x-4.h-full
-                        span.p-2
-                          i.fas.fa-heart
-                          |  841K
-                        span.p-2
-                          i.fas.fa-comment
-                          |  909
-              .w-1/3.p-px.md:px-3
-                a[href="#"]
-                  article.post.bg-gray-100.text-white.relative.pb-full.md:mb-6
-                    img.w-full.h-full.absolute.left-0.top-0.object-cover[src="https://images.unsplash.com/photo-1475688621402-4257c812d6db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80" alt="image"]
-                    .overlay.bg-gray-800.bg-opacity-25.w-full.h-full.absolute.left-0.top-0.hidden
-                      .flex.justify-center.items-center.space-x-4.h-full
-                        span.p-2
-                          i.fas.fa-heart
-                          |  120K
-                        span.p-2
-                          i.fas.fa-comment
-                          |  3,909
-
-          div x-show=("tab === 'tab2'")
-            | Tab2 content. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt sunt, consectetur eos quod perferendis mollitia consequuntur natus, porro molestiae qui iusto deserunt rerum tempore voluptatum itaque. Ad, nisi esse cum quidem consequuntur ullam obcaecati.
-          div x-show=("tab === 'tab3'")
+          div x-show=("tab === 'igtv'")
+            div.flex.flex-wrap
+              div.w-1/3.p-px.md:px-3
+                |1
+              div.w-1/3.p-px.md:px-3
+                |2
+              div.w-1/3.p-px.md:px-3
+                |3
+              div.w-1/3.p-px.md:px-3
+                |4
+          div x-show=("tab === 'saved'")
             | Tab3 content. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt sunt, consectetur eos quod perferendis mollitia consequuntur natus, porro molestiae qui iusto deserunt rerum tempore voluptatum itaque. Ad, nisi esse cum quidem consequuntur ullam obcaecati.
+          div x-show=("tab === 'tagged'")
+            | Tab4 content. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt sunt, consectetur eos quod perferendis mollitia consequuntur natus, porro molestiae qui iusto deserunt rerum tempore voluptatum itaque. Ad, nisi esse cum quidem consequuntur ullam obcaecati.
+
