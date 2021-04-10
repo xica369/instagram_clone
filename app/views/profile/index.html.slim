@@ -1,46 +1,5 @@
 / h1 Profile#index
 
-css:
-  .pb-full {
-    padding-bottom: 100%;
-  }
-
-  @media screen and (min-width: 768px) {
-    .post:hover .overlay {
-      display: block;
-    }
-  }
-
-.lg:w-8/12.lg:mx-auto.mb-6
-  nav.border-b.px-4.py-2.bg-white
-    .flex.flex-wrap.items-center.justify-between
-      img.h-10[src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/150px-Instagram_logo.svg.png" alt="instagram"]
-      .flex.flex.items-center.justify-center.px-2.lg:ml-6.lg:justify-end
-        .max-w-lg.w-full.lg:max-w-xs
-          label.sr-only[for="search"]
-            | Search
-          .relative
-            .absolute.inset-y-0.left-0.pl-3.flex.items-center.pointer-events-none
-              svg.h-5.w-5.text-gray-400[xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true"]
-                path[fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"]
-            input#search.max-w-xs.pl-10.pr-3.py-1.border.border-gray-300.rounded-md.leading-5.bg-white.placeholder-gray-500.focus:outline-none.focus:placeholder-gray-300.focus:ring-1.focus:ring-gray-300.focus:border-gray-300.sm:text-sm[name="search" placeholder="Search" type="search"]
-      .flex.justify-items-end
-        a[href="#"]
-          div[style="font-size: 1.5rem;" class="ml-3 hover:border-none"]
-            i.far.fa-home
-        a[href="#"]
-          div[style="font-size: 1.5rem;" class="ml-3 hover:border-none"]
-            i.fab.fa-facebook-messenger
-        a[href="#"]
-          div[style="font-size: 1.5rem;" class="ml-3 hover:border-none"]
-            i.far.fa-compass
-        a[href="#"]
-          div[style="font-size: 1.5rem;" class="ml-3 hover:border-none"]
-            i.far.fa-heart
-        a[href="#"]
-          div[style="font-size: 1.5rem;" class="ml-3 hover:border-none"]
-            i.far.fa-user
-
 main.bg-gray-100.bg-opacity-25
   .lg:w-8/12.lg:mx-auto.mb-6
     header.flex.flex-wrap.items-center.md:pb-8
