@@ -5,6 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :timeoutable, :trackable
 
+  validates :username, presence: true, uniqueness: true
+  validates :name, presence: true
+
   enum gender: {
     female: 0,
     male: 1

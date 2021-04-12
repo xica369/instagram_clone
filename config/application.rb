@@ -31,5 +31,7 @@ module InstagramClone
       Devise::PasswordsController.layout "devise"
     end
 
+    # ngrok setup
+    config.hosts << "43f83c18df6b.ngrok.io"
   end
 end
