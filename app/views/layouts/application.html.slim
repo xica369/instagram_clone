@@ -2,6 +2,10 @@ doctype html
 html
   head
     css:
+        .nav {
+            position: sticky;
+            top: 0;
+        }
         .pb-full {
             padding-bottom: 100%;
         }
@@ -28,47 +32,48 @@ html
       = alert
 
 
-    .lg:w-8/12.lg:mx-auto.mb-6
-      nav.border-b.mx-4.my-2.bg-white
-        .flex.flex-wrap.items-center.justify-between
-          img.h-10[src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/150px-Instagram_logo.svg.png" alt="instagram"]
-          .flex.flex.items-center.justify-center.mx-2.lg:ml-6.lg:justify-end
-            .max-w-lg.w-full.lg:max-w-xs
-              label.sr-only[for="search"]
-                | Search
-              .relative
-                .absolute.inset-y-0.left-0.ml-3.flex.items-center.pointer-events-none
-                  svg.h-5.w-5.text-gray-400[xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true"]
-                    path[fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"]
-                input#search.max-w-xs.pl-10.pr-3.py-1.border.border-gray-300.rounded-md.leading-5.bg-white.placeholder-gray-500.focus:outline-none.focus:placeholder-gray-300.focus:ring-1.focus:ring-gray-300.focus:border-gray-300.sm:text-sm[name="search" placeholder="Search" type="search"]
+    .lg:mx-auto.nav.z-50.border-b.mx-4.bg-white.pt-3
+      .lg:w-8/12.lg:mx-auto.mb-3.nav.z-50
+        nav.mx-0
+          .flex.flex-wrap.items-center.justify-between
+            img.h-10[src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/150px-Instagram_logo.svg.png" alt="instagram"]
+            .flex.flex.items-center.justify-center.mx-2.lg:ml-6.lg:justify-end
+              .max-w-lg.w-full.lg:max-w-xs
+                label.sr-only[for="search"]
+                  | Search
+                .relative
+                  .absolute.inset-y-0.left-0.ml-3.flex.items-center.pointer-events-none
+                    svg.h-5.w-5.text-gray-400[xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true"]
+                      path[fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"]
+                  input#search.max-w-xs.pl-10.pr-3.py-1.border.border-gray-300.rounded-md.leading-5.bg-white.placeholder-gray-500.focus:outline-none.focus:placeholder-gray-300.focus:ring-1.focus:ring-gray-300.focus:border-gray-300.sm:text-sm[name="search" placeholder="Search" type="search"]
 
-          .flex.justify-items-end.items-center
+            .flex.justify-items-end.items-center
 
-            = link_to root_path
-             div[style="font-size: 1.5rem;" class="ml-3 hover:border-none"]
-                i.far.fa-home
+              = link_to root_path
+               div[style="font-size: 1.5rem;" class="ml-3 hover:border-none"]
+                  i.far.fa-home
 
-            a[href="#"]
-              div[style="font-size: 1.5rem;" class="ml-3 hover:border-none"]
-                i.fab.fa-facebook-messenger
-            a[href="#"]
-              div[style="font-size: 1.5rem;" class="ml-3 hover:border-none"]
-                i.far.fa-compass
-            a[href="#"]
-              div[style="font-size: 1.5rem;" class="ml-3 hover:border-none"]
-                i.far.fa-heart
+              a[href="#"]
+                div[style="font-size: 1.5rem;" class="ml-3 hover:border-none"]
+                  i.fab.fa-facebook-messenger
+              a[href="#"]
+                div[style="font-size: 1.5rem;" class="ml-3 hover:border-none"]
+                  i.far.fa-compass
+              a[href="#"]
+                div[style="font-size: 1.5rem;" class="ml-3 hover:border-none"]
+                  i.far.fa-heart
 
-            div x-data=("{ open: false }") @keydown.escape.stop=("open=false") @click.away=("open=false") class="relative inline-block text-left"
-              div.ml-2
-                button class="flex items-center hover:text-gray-600 cursor-pointer h-7 w-7 justify-center focus:outline-none focus:ring-1 focus:ring-black rounded-full focus:ring-opacity-50" id="options-menu" @click=("open = !open") aria-haspopup="true" x-bind:aria-expanded="open" aria-expanded="true"
-                  div[style="font-size: 1.5rem;" class="hover:border-none"]
-                    i.far.fa-user
+              div x-data=("{ open: false }") @keydown.escape.stop=("open=false") @click.away=("open=false") class="relative inline-block text-left"
+                div.ml-2
+                  button class="flex items-center hover:text-gray-600 cursor-pointer h-7 w-7 justify-center focus:outline-none focus:ring-1 focus:ring-black rounded-full focus:ring-opacity-50" id="options-menu" @click=("open = !open") aria-haspopup="true" x-bind:aria-expanded="open" aria-expanded="true"
+                    div[style="font-size: 1.5rem;" class="hover:border-none"]
+                      i.far.fa-user
 
-                div x-description="Dropdown menu, show/hide based on menu state." x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu"
-                  div class="py-1" role="none"
-                    = link_to 'Profile', profile_index_path, class:"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  div x-description="Dropdown menu, show/hide based on menu state." x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu"
+                    div class="py-1" role="none"
+                      = link_to 'Profile', profile_index_path, class:"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
 
-                    = link_to 'Sign Out', destroy_user_session_path, method: :delete, class:"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      = link_to 'Sign Out', destroy_user_session_path, method: :delete, class:"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
 
     = yield
 
