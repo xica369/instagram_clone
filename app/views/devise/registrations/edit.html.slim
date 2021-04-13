@@ -2,107 +2,194 @@
 /   | Edit
   = resource_name.to_s.humanize
 
-.min-h-screen.bg-gray-50.flex.flex-row.justify-end.py-12.sm:px-6.lg:px-8
-  .sm:mx-auto.sm:w-full.sm:max-w-md
+main.bg-gray-100.bg-opacity-25
+  .lg:w-8/12.lg:mx-auto.mb-6
+    .container x-data=("{ tab: window.location.hash ? window.location.hash.substring(1) : 'posts' }")
 
-    div.flex.items-stretch.justify-items-stretch.items-start
+      div
 
-      .mt-8.sm:mx-auto.sm:w-full.sm:max-w-md.flex.justify-end.items-stretch
-        div.flex.flex-col.place-content-stretch
-          .bg-white.py-8.px-4.shadow.sm:rounded-lg.sm:px-10.border.border-gray-200.h-full
-          .bg-white.py-8.px-4.shadow.sm:rounded-lg.sm:px-10.border.border-gray-200
+        .flex x-data=("{ tab: window.location.hash ? window.location.hash.substring(1) : 'edit_profile' }")
+          div.flex.flex-col
+            .bg-white.py-8.shadow.sm:border.border-gray-200.h-full
+              .container
+                div
+                  ul.flex.flex-col.md:justify-center.font-semibold
 
-        .bg-white.py-8.px-4.shadow.sm:rounded-lg.sm:px-10.border.border-gray-200
+                    li.mb-6.w-full
+                      a[class="font-semibold p-3 whitespace-nowrap md:border-l-2 md:border-white" :class=("{ 'md:border-gray-700' : tab === 'edit_profile' }") @click.prevent=("tab = 'edit_profile'; window.location.hash = 'edit_profile'") href="#"]
+                        span
+                          | Edit Profile
 
-          = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-            = render "devise/shared/error_messages", resource: resource
-            div.flex.flex-row
-              div.px-4.w-1/3.flex.justify-end.font-bold
-                = f.label :name, "Name"
-              div.w-2/3
-                div.flex.flex-col
-                  div
-                    = f.text_field :name, autocomplete: "name", class: "block w-full mb-2 p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent text-xs text-opacity-75 bg-gray-50", placeholder: "Username"
-                  div.text-xs.extralight.text-gray-400
-                    p
-                      | Help people discover your account by using the name you're
-                      |  known by: either your full name, nickname, or business name.
-                    br
-                      | You can only change your name twice within 14 days.
-                    br
+                    li.mb-6.w-full
+                      a[class="font-semibold p-3 whitespace-nowrap md:border-l-2 md:border-white" :class=("{ 'md:border-gray-700' : tab === 'change_password' }") @click.prevent= ("tab = 'change_password'; window.location.hash = 'change_password'") href = "#"]
+                        span
+                          | Change Password
 
-            div.flex.flex-row
-              div.px-4.w-1/3.flex.justify-end.font-bold
-                = f.label :username, "Username"
-              div.w-2/3
-                div.flex.flex-col
-                  div
-                    = f.text_field :username, autocomplete: "username", class: "block w-full mb-2 p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent text-xs text-opacity-75 bg-gray-50", placeholder: "Username"
-                  div.text-xs.extralight.text-gray-400
-                    p
-                      = "In most cases, you'll be able to change your username back to #{current_user.username} for another 14 days."
-                    br
+                    li.mb-6.w-full
+                      a[class="font-semibold p-3 whitespace-nowrap md:border-l-2 md:border-white" :class=("{ 'md:border-gray-700' : tab === 'apps_websites' }") @click.prevent= ("tab = 'apps_websites'; window.location.hash = 'apps_websites'") href = "#"]
+                        span
+                          | Apps and Websites
 
-            div.flex.flex-row
-              div.px-4.w-1/3.flex.justify-end.font-bold
-                = f.label :website, "Website"
-              div.w-2/3
-                div.flex.flex-col
-                  = f.text_field :website, autocomplete: "website", class: "block w-full mb-2 p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent text-xs text-opacity-75 bg-gray-50", placeholder: "Website"
+                    li.mb-6.w-full
+                      a[class="font-semibold p-3 whitespace-nowrap md:border-l-2 md:border-white" :class=("{ 'md:border-gray-700' : tab === 'email_sms' }") @click.prevent= ("tab = 'email_sms'; window.location.hash = 'email_sms'") href = "#"]
+                        span
+                          | Email and SMS
 
-            div.flex.flex-row
-              div.px-4.w-1/3.flex.justify-end.font-bold
-                = f.label :bio, "Bio"
-              div.w-2/3
-                div.flex.flex-col
-                  div
-                    = f.text_area :bio, autocomplete: "bio", class: "block w-full mb-2 p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent text-xs text-opacity-75 bg-gray-50", placeholder: "Bio"
-                  div.text-xs.extralight.text-gray-400
-                    p.font-bold.text-gray-400
-                      | Personal Information
-                    p.extralight.text-gray-400
-                      | Provide your personal information, even if the account is used for a business, a pet or something else. This won't be a part of your public profile.
-                    br
+                    li.mb-6.w-full
+                      a[class="font-semibold p-3 whitespace-nowrap md:border-l-2 md:border-white" :class=("{ 'md:border-gray-700' : tab === 'push_notifications' }") @click.prevent= ("tab = 'push_notifications'; window.location.hash = 'push_notifications'") href = "#"]
+                        span
+                          | Push Notifications
 
-            div.flex.flex-row
-              div.px-4.w-1/3.flex.justify-end.font-bold
-                .field
-                  = f.label :email
+                    li.mb-6.w-full
+                      a[class="font-semibold p-3 whitespace-nowrap md:border-l-2 md:border-white" :class=("{ 'md:border-gray-700' : tab === ' manage_contacts' }") @click.prevent= ("tab = 'manage_contacts'; window.location.hash = 'manage_contacts'") href = "#"]
+                        span
+                          | Manage Contacts
 
-              div.w-2/3
-                  = f.email_field :email, autofocus: true, autocomplete: "email"
+                    li.mb-6.w-full
+                      a[class="font-semibold p-3 whitespace-nowrap md:border-l-2 md:border-white" :class=("{ 'md:border-gray-700' : tab === 'privacy_security' }") @click.prevent= ("tab = 'privacy_security'; window.location.hash = 'privacy_security'") href = "#"]
+                        span
+                          | Privacy and Security
 
-                  div
-                    | Currently waiting confirmation for:
-                    = resource.unconfirmed_email
-            .field
-              = f.label :password
-              i
-                | (leave blank if you don't want to change it)
-              br
-              = f.password_field :password, autocomplete: "new-password"
-              - if @minimum_password_length
-                br
-                em
-                  = @minimum_password_length
-                  |  characters minimum
-            .field
-              = f.label :password_confirmation
-              br
-              = f.password_field :password_confirmation, autocomplete: "new-password"
-            .field
-              = f.label :current_password
-              i
-                | (we need your current password to confirm your changes)
-              br
-              = f.password_field :current_password, autocomplete: "current-password"
-            .actions
-              = f.submit "Update"
-          h3
-            | Cancel my account
-          p
-            | Unhappy?
-            = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete
-          = link_to "Back", :back
+                    li.mb-6.w-full
+                      a[class="font-semibold p-3 whitespace-nowrap md:border-l-2 md:border-white" :class=("{ 'md:border-gray-700' : tab === 'login_activity' }") @click.prevent= ("tab = 'login_activity'; window.location.hash = 'login_activity'") href = "#"]
+                        span
+                          | Login Activity
+
+                    li.mb-6.w-full.mr-3
+                      a[class="font-semibold p-3 whitespace-nowrap md:border-l-2 md:border-white" :class=("{ 'md:border-gray-700' : tab === 'emails_from_instagram' }") @click.prevent= ("tab = 'emails_from_instagram'; window.location.hash = 'emails_from_instagram'") href = "#"]
+                        span
+                          | Emails from Instagram
+
+            .bg-white.py-8.px-4.shadow.sm:px-10.border.border-gray-200
+              | F A C E B O O K
+
+          .bg-white.py-8.px-4.shadow.sm:px-10.border.border-gray-200.flex.flex-grow
+            .content.w-full
+              div x-show=("tab === 'edit_profile'")
+
+                = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+                  = render "devise/shared/error_messages", resource: resource
+                  div.flex.flex-row
+                    div.px-8.w-1/4.flex.justify-end.font-bold
+                      = f.label :name, "Name"
+                    div.w-3/4.pr-16
+                      div.flex.flex-col
+                        div
+                          = f.text_field :name, autocomplete: "name", class: "block w-full mb-2 p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent text-xs text-opacity-75 bg-gray-50", placeholder: "Username"
+                        div.text-xs.extralight.text-gray-400
+                          p
+                            | Help people discover your account by using the name you're
+                            |  known by: either your full name, nickname, or business name.
+                          br
+                            | You can only change your name twice within 14 days.
+                          br
+
+                  div.flex.flex-row
+                    div.px-8.w-1/4.flex.justify-end.font-bold
+                      = f.label :username, "Username"
+                    div.w-3/4.pr-16
+                      div.flex.flex-col
+                        div
+                          = f.text_field :username, autocomplete: "username", class: "block w-full mb-2 p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent text-xs text-opacity-75 bg-gray-50", placeholder: "Username"
+                        div.text-xs.extralight.text-gray-400
+                          p
+                            = "In most cases, you'll be able to change your username back to #{current_user.username} for another 14 days."
+                          br
+
+                  div.flex.flex-row
+                    div.px-8.w-1/4.flex.justify-end.font-bold
+                      = f.label :website, "Website"
+                    div.w-3/4.pr-16
+                      div.flex.flex-col
+                        = f.text_field :website, autocomplete: "website", class: "block w-full mb-2 p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent text-xs text-opacity-75 bg-gray-50", placeholder: "Website"
+
+                  div.flex.flex-row
+                    div.px-8.w-1/4.flex.justify-end.font-bold
+                      = f.label :bio, "Bio"
+                    div.w-3/4.pr-16
+                      div.flex.flex-col
+                        div
+                          = f.text_area :bio, autocomplete: "bio", class: "block w-full mb-2 p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent text-xs text-opacity-75 bg-gray-50", placeholder: "Bio"
+                        div.text-xs.extralight.text-gray-400
+                          p.font-bold.text-gray-400
+                            | Personal Information
+                          p.extralight.text-gray-400
+                            | Provide your personal information, even if the account is used for a business, a pet or something else. This won't be a part of your public profile.
+                          br
+
+                  div.flex.flex-row
+                    div.px-8.w-1/4.flex.justify-end.font-bold
+                      = f.label :email, "Email"
+                    div.w-3/4.pr-16
+                        = f.email_field :email, autofocus: true, autocomplete: "email", class: "block w-full mb-2 p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent text-xs text-opacity-75 bg-gray-50", placeholder: "Email"
+
+                  div.flex.flex-row
+                    div.px-8.w-1/4.flex.justify-end.font-bold.whitespace-nowrap
+                      = f.label :phone, "Phone Number"
+                    div.w-3/4.pr-16
+                      = f.telephone_field :phone, autofocus: true, autocomplete: "phone", class: "block w-full mb-2 p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent text-xs text-opacity-75 bg-gray-50", placeholder: "Phone Number"
+
+                  div.flex.flex-row
+                    div.px-8.w-1/4.flex.justify-end.font-bold
+                      = f.label :email, "Gender"
+                    div.w-3/4.pr-16
+                      = f.text_field :gender, autofocus: true, autocomplete: "gender", class: "block w-full mb-2 p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent text-xs text-opacity-75 bg-gray-50", placeholder: "Gender"
+
+              div.w-full x-show=("tab === 'change_password'")
+                = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+                  = render "devise/shared/error_messages", resource: resource
+
+                  div.flex.flex-row
+                    div.px-8.w-1/3.flex.justify-end.font-bold.whitespace-nowrap
+                      = f.label :current_password, "Old Password"
+                    div.w-2/3.pr-16
+                      = f.password_field :current_password, autofocus: true, autocomplete: "current-password", class: "block w-full mb-2 p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent text-xs text-opacity-75 bg-gray-50", placeholder: "Old Password"
+
+                  div.flex.flex-row
+                    div.px-8.w-1/3.flex.justify-end.font-bold.whitespace-nowrap
+                      = f.label :password, "New Password"
+                    div.w-2/3.pr-16
+                      = f.password_field :password, autofocus: true, autocomplete: "new-password", class: "block w-full mb-2 p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent text-xs text-opacity-75 bg-gray-50", placeholder: "New Password"
+
+
+                  div.flex.flex-row
+                    div.px-8.w-1/3.flex.justify-end.font-bold.whitespace-nowrap
+                      = f.label :current_password, "Confirm New Password"
+                    div.w-2/3.pr-16
+                      = f.password_field :password_confirmation, autofocus: true, autocomplete: "new-password", class: "block w-full mb-2 p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent text-xs text-opacity-75 bg-gray-50", placeholder: "Password Confirmation"
+
+                  div.flex.row.justify-end
+                    div.w-2/3.pr-16.my-3
+                      .actions
+                        = f.submit "Change Password", class:"group relative flex justify-center my-5 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+
+              /     i
+              /       | (we need your current password to confirm your changes)
+              /     br
+              /     = f.password_field :current_password, autocomplete: "current-password"
+              /     br
+              /      = f.label :password
+              /     i
+              /       | (leave blank if you don't want to change it)
+              /     br
+              /     = f.password_field :password, autocomplete: "new-password"
+              /     - if @minimum_password_length
+              /       br
+              /       em
+              /         = @minimum_password_length
+              /         |  characters minimum
+              /
+              /     = f.label :password_confirmation
+              /     br
+              /     = f.password_field :password_confirmation, autocomplete: "new-password"
+              /
+              /     .actions
+              /       = f.submit "Update"
+              /     h3
+              /       | Cancel my account
+              / p
+              /   | Unhappy?
+              /   = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete
+              / = link_to "Back", :back
 
 

@@ -14,3 +14,4 @@ db/schema.rb
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+.byebug_history
