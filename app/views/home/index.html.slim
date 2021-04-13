@@ -7,17 +7,38 @@
         span.pt-1.ml-2.font-bold.text-sm braydoncoyer
       span.px-2.hover:bg-gray-300.cursor-pointer.rounded
         i.fas.fa-ellipsis-h.pt-2.text-lg
-    img.w-full.bg-cover src="https://3.bp.blogspot.com/-Chu20FDi9Ek/WoOD-ehQ29I/AAAAAAAAK7U/mc4CAiTYOY8VzOFzBKdR52aLRiyjqu0MwCLcBGAs/s1600/DSC04596%2B%25282%2529.JPG" /
-    .px-3.pb-2
-      .pt-2
-        i.far.fa-heart.cursor-pointer
-        span.text-sm.text-gray-400.font-medium 12 likes
-      .pt-1
-        .mb-2.text-sm
-          span.font-medium.mr-2 braydoncoyer
-          | Lord of the Rings is my favorite film-series. One day I'll make my way to New Zealand to visit the Hobbiton set!
-      .text-sm.mb-2.text-gray-400.cursor-pointer.font-medium View all 14 comments
-      .mb-2
-        .mb-2.text-sm
-          span.font-medium.mr-2 razzle_dazzle
-          | Dude! How cool! I went to New Zealand last summer and had a blast taking the tour! So much to see! Make sure you bring a good camera when you go!
+
+    / img.w-full.bg-cover src="https://3.bp.blogspot.com/-Chu20FDi9Ek/WoOD-ehQ29I/AAAAAAAAK7U/mc4CAiTYOY8VzOFzBKdR52aLRiyjqu0MwCLcBGAs/s1600/DSC04596%2B%25282%2529.JPG" /
+    .content
+      - Post.all.each do |post|
+        = render partial: "profile/posts/post", locals: {post:post}
+
+        .px-3.pb-2
+          .pt-2.flex.flex-row.w-full
+            div.flex.flex-row
+              a[href="#"]
+                div[style="font-size: 1.5rem;" class="ml-3 hover:border-none"]
+                  i.far.fa-heart
+
+              a[href="#"]
+                div[style="font-size: 1.5rem;" class="ml-3 hover:border-none"]
+                  i.far.fa-comment
+
+              a[href="#"]
+                div[style="font-size: 1.5rem;" class="ml-3 hover:border-none"]
+                  i.far.fa-paper-plane
+
+            div.flex.justify-end.w-full
+              a[href="#"]
+                div[style="font-size: 1.5rem;" class="ml-3 hover:border-none"]
+                  i.far.fa-bookmark
+
+          .pt-1
+            .mb-2.text-sm
+              span.font-medium.mr-2 braydoncoyer
+              | Lord of the Rings is my favorite film-series. One day I'll make my way to New Zealand to visit the Hobbiton set!
+          .text-sm.mb-2.text-gray-400.cursor-pointer.font-medium View all 14 comments
+          .my-2
+            .my-2.text-sm
+              span.font-medium.mr-2 razzle_dazzle
+              | Dude! How cool! I went to New Zealand last summer and had a blast taking the tour! So much to see! Make sure you bring a good camera when you go!
