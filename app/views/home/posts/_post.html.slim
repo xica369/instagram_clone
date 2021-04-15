@@ -1,10 +1,9 @@
 .bg-gray-50.flex.flex-row.justify-center.pt-6.pb-9.sm:px-6.lg:px-8
-  .rounded.overflow-hidden.border.w-full.bg-white.mx-3.md:mx-0.lg:mx-0 class=("lg:w-6/12 md:w-6/12")
+  .rounded.overflow-hidden.border.bg-white.mx-3.md:mx-0.lg:mx-0.w-full.sm:w-3/6.lg:w-3/6.xl:w-3/12
     .w-full.flex.justify-between
       .flex.p-4
         .rounded-full.h-8.w-8.bg-gray-500.flex.items-center.justify-center.overflow-hidden
-          / img alt="profilepic" src="https://avatars0.githubusercontent.com/u/38799309?v=4" /
-          / .md:w-3/12.md:ml-16
+
           a[href="#"]
             - if post.user.photo.attached?
               = image_tag post.user.photo
@@ -22,10 +21,13 @@
 
     .px-2.pb-2.pt-2
       .flex.flex-row.w-full
+
         div.flex.flex-row
-          a[href="#"]
-            div[style="font-size: 1.5rem;" class="ml-3 hover:border-none"]
-              i.far.fa-heart
+          button  [data-reflex="click->Like#change_likes" data-user="#{current_user.id}" data-post="#{post.id}"]
+            - if LikePost.where(user:current_user, post:post).count == 1
+              i.fas.fa-heart [style="font-size: 1.5rem;" class="ml-3 hover:border-none text-red-700"]
+            - else
+              i.far.fa-heart [style="font-size: 1.5rem;" class="ml-3 hover:border-none"]
 
           a[href="#"]
             div[style="font-size: 1.5rem;" class="ml-3 hover:border-none"]
@@ -66,10 +68,18 @@
           = post.comments.third_to_last&.text
 
     div.border-t.border-gray-200
-      = form_for(current_user, as: :user, url: registration_path(:user), html: { method: :put }) do |f|
-        = render "devise/shared/error_messages", resource: current_user
-        div.flex.flex-row
-          = f.text_area :phone, class: "flex justify.center w-full pl-4 pb-2 pt-4 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:border-transparent text-ms text-opacity-75 border-0", placeholder: "Add a comment..."
-          .actions
-            = f.submit "Post", class:"group relative flex justify-center my-5 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      div [data-controller="comment"]
+        input[data-comment-target="user" value="#{current_user.id}" type="hidden"]
+        input[data-target="comment.post" value="#{post.id}" type="hidden"]
+        input[data-target="comment.comment" class= "flex justify.center w-full pl-4 pb-2 pt-4 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:border-transparent text-ms text-opacity-75 border-0" placeholder= "Add a comment..."]
+
+        button[data-action="click->comment#create" class="group relative flex justify-center my-5 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"] Post
+
+
+      / = form_with(model: [post, post.comments.build]) do |f|
+      /   div.flex.flex-row
+      /     = f.hidden_field :user_id, value: current_user.id
+      /     = f.text_area :text, class: "flex justify.center w-full pl-4 pb-2 pt-4 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:border-transparent text-ms text-opacity-75 border-0", placeholder: "Add a comment..."
+      /     .actions
+      /       = f.submit "Post", class:"group relative flex justify-center my-5 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 

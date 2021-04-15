@@ -1,7 +1,7 @@
 / h1 Profile#index
 
 main.bg-gray-100.bg-opacity-25
-  .lg:w-8/12.lg:mx-auto.mb-6
+  .lg:w-9/12.lg:mx-auto.mb-6.xl:w-2/6
     header.flex.flex-wrap.items-center.md:pb-8
 
       .md:w-3/12.md:ml-16
@@ -45,7 +45,7 @@ main.bg-gray-100.bg-opacity-25
           a.text-blue-800.font-semibold[href="#"]
             = current_user.website
 
-    .container x-data=("{ tab: window.location.hash ? window.location.hash.substring(1) : 'posts' }")
+    .container [data-reflex-permanent id="id_container" x-data=("{ tab: window.location.hash ? window.location.hash.substring(1) : 'posts' }")]
       .px-px.md:px-3
         ul.flex.items-center.justify-around.md:justify-center.space-x-12.uppercase.tracking-widest.font-semibold.text-xs.text-gray-600.border-t
           li

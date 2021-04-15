@@ -4,11 +4,10 @@
 
 main.bg-gray-100.bg-opacity-25
   .lg:w-8/12.lg:mx-auto.mb-6
-    .container x-data=("{ tab: window.location.hash ? window.location.hash.substring(1) : 'posts' }")
 
       div
 
-        .flex x-data=("{ tab: window.location.hash ? window.location.hash.substring(1) : 'edit_profile' }")
+        .flex id="edit_profile" x-data=("{ tab: window.location.hash ? window.location.hash.substring(1) : 'edit_profile' }")
           div.flex.flex-col
             .bg-white.py-8.shadow.sm:border.border-gray-200.h-full
               .container

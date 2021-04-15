@@ -21,6 +21,7 @@ html
     meta[name="viewport" content="width=device-width,initial-scale=1"]
     = csrf_meta_tags
     = csp_meta_tag
+    = action_cable_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
@@ -33,11 +34,11 @@ html
 
 
     .lg:mx-auto.nav.z-50.border-b.mx-4.bg-white.pt-3
-      .lg:w-8/12.lg:mx-auto.mb-3.nav.z-50
+      .w-full.xs:w-9/12.lg:w-9/12.xl:w-2/6.lg:mx-auto.mb-3.nav.z-50
         nav.mx-0
-          .flex.flex-wrap.items-center.justify-between
+          .flex.items-center.justify-between
             img.h-10[src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/150px-Instagram_logo.svg.png" alt="instagram"]
-            .flex.flex.items-center.justify-center.mx-2.lg:ml-6.lg:justify-end
+            .flex.flex.items-center.justify-center.mx-2.xs:ml-2.lg:ml-6.lg:justify-end
               .max-w-lg.w-full.lg:max-w-xs
                 label.sr-only[for="search"]
                   | Search
@@ -63,17 +64,17 @@ html
                 div[style="font-size: 1.5rem;" class="ml-3 hover:border-none"]
                   i.far.fa-heart
 
-              div x-data=("{ open: false }") @keydown.escape.stop=("open=false") @click.away=("open=false") class="relative inline-block text-left"
-                div.ml-2
-                  button class="flex items-center hover:text-gray-600 cursor-pointer h-7 w-7 justify-center focus:outline-none focus:ring-1 focus:ring-black rounded-full focus:ring-opacity-50" id="options-menu" @click=("open = !open") aria-haspopup="true" x-bind:aria-expanded="open" aria-expanded="true"
-                    div[style="font-size: 1.5rem;" class="hover:border-none"]
-                      i.far.fa-user
+            div [id="menu-nav"  x-data=("{ open: false }") @click.away=("open=false") class="relative inline-block text-left"]
+              div.ml-2
+                button [class="flex items-center hover:text-gray-600 cursor-pointer h-7 w-7 justify-center focus:outline-none focus:ring-1 focus:ring-black rounded-full focus:ring-opacity-50" id="options-menu" @click=("open = !open") aria-haspopup="true" x-bind:aria-expanded="open" aria-expanded="true"]
+                  div[style="font-size: 1.5rem;" class="hover:border-none"]
+                    i.far.fa-user
 
-                  div x-description="Dropdown menu, show/hide based on menu state." x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu"
-                    div class="py-1" role="none"
-                      = link_to 'Profile', profile_index_path, class:"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                div [x-description="Dropdown menu, show/hide based on menu state." x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu"]
+                  div [class="py-1" role="none"]
+                    = link_to 'Profile', profile_index_path, class:"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
 
-                      = link_to 'Sign Out', destroy_user_session_path, method: :delete, class:"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    = link_to 'Sign Out', destroy_user_session_path, method: :delete, class:"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
 
     = yield
 
