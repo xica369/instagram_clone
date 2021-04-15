@@ -17,7 +17,8 @@
         i.fas.fa-ellipsis-h.pt-2.text-lg
 
     .article.post.bg-gray-100.text-white.relative.pb-full.border-t.border-gray-200
-      = image_tag post.files.last, class: "w-full h-full absolute left-0 top-0"
+      - if post.files.count > 0
+        = image_tag post.files.last, class: "w-full h-full absolute left-0 top-0"
 
     .px-2.pb-2.pt-2
       .flex.flex-row.w-full
@@ -71,8 +72,7 @@
       div [data-controller="comment"]
         input[data-comment-target="user" value="#{current_user.id}" type="hidden"]
         input[data-target="comment.post" value="#{post.id}" type="hidden"]
-        input[data-target="comment.comment" class= "flex justify.center w-full pl-4 pb-2 pt-4 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:border-transparent text-ms text-opacity-75 border-0" placeholder= "Add a comment..."]
-
+        input[data-target="comment.comment" id="comment_input" class= "flex justify.center w-full pl-4 pb-2 pt-4 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:border-transparent text-ms text-opacity-75 border-0" placeholder= "Add a comment..."]
         button[data-action="click->comment#create" class="group relative flex justify-center my-5 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"] Post
 
 

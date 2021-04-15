@@ -6,7 +6,6 @@
 import Rails from "@rails/ujs"
 import { Turbo, cable } from "@hotwired/turbo-rails"
 window.Turbo = Turbo
-import ahoy from 'ahoy.js';
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "chartkick"
