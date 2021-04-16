@@ -24,7 +24,7 @@
       .flex.flex-row.w-full
 
         div.flex.flex-row
-          button  [data-reflex="click->Like#change_likes" data-user="#{current_user.id}" data-post="#{post.id}"]
+          button  [id="like_button" data-reflex="click->Like#change_likes" data-user="#{current_user.id}" data-post="#{post.id}"]
             - if LikePost.where(user:current_user, post:post).count == 1
               i.fas.fa-heart [style="font-size: 1.5rem;" class="ml-3 hover:border-none text-red-700"]
             - else
