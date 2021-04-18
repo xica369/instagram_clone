@@ -1,5 +1,5 @@
 .content
-  - Post.all.reverse.each do |post|
+  - @posts.reverse.each do |post|
     = render partial: "home/posts/post", locals: {post:post}
 
 

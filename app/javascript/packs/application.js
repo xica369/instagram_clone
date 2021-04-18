@@ -11,7 +11,7 @@ import "channels"
 import "chartkick"
 import "chart.js"
 import "choices.js"
-// import 'alpine-turbo-drive-adapter'
+import "alpine-turbolinks-adapter"
 import "alpinejs"
 //ActiveStorage.start()
 Rails.start()
