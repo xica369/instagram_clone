@@ -4,7 +4,6 @@
       .flex.p-4
         .rounded-full.h-8.w-8.bg-gray-500.flex.items-center.justify-center.overflow-hidden
 
-          / = link_to "", /users/:id(.:format)
           a[href="#{user_path(post.user)}"]
             - if post.user.photo.attached?
               = image_tag post.user.photo
@@ -25,7 +24,7 @@
       .flex.flex-row.w-full
 
         div.flex.flex-row
-          button  [id="like_button" data-reflex="click->Like#change_likes" data-user="#{current_user.id}" data-post="#{post.id}"]
+          button.focus:outline-none  [id="like_button" data-reflex="click->Like#change_likes" data-user="#{current_user.id}" data-post="#{post.id}"]
             - if LikePost.where(user:current_user, post:post).count == 1
               i.fas.fa-heart [style="font-size: 1.5rem;" class="ml-3 hover:border-none text-red-700"]
             - else

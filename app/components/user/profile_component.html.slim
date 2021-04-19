@@ -7,11 +7,11 @@ main.bg-gray-100.bg-opacity-25
       .md:w-3/12.md:ml-16
         a[href="#"]
           - if @user.photo.attached?
-            = image_tag @user.photo, class: "w-20 h-20 md:w-40 md:h-40 object-cover rounded-full p-1"
+            = image_tag @user.photo, class: "w-20 h-20 md:w-20 md:h-20 object-cover rounded-full p-1"
           - else
               img.w-20.h-20.md:w-40.md:h-40.object-cover.rounded-full.p-1[src="https://images-na.ssl-images-amazon.com/images/I/51e6kpkyuIL._AC_SL1200_.jpg" alt="profile"]
 
-      .w-8/12.md:w-7/12.ml-4
+      .w-8/12.md:w-6/12.ml-4
         .md:flex.md:flex-wrap.md:items-center.mb-4
           h2.text-3xl.inline-block.font-light.md:mr-2.mb-2.sm:mb-0
             = @user.username
