@@ -1,23 +1,30 @@
 / h1 Profile#index
-= render User::ProfileComponent.new user: current_user
-/ main.bg-gray-100.bg-opacity-25
+
+main.bg-gray-100.bg-opacity-25
   .lg:w-9/12.lg:mx-auto.mb-6.xl:w-2/6
     header.flex.flex-wrap.items-center.md:pb-8
 
       .md:w-3/12.md:ml-16
         a[href="#"]
-          - if current_user.photo.attached?
-            = image_tag current_user.photo, class: "w-20 h-20 md:w-40 md:h-40 object-cover rounded-full p-1"
+          - if @user.photo.attached?
+            = image_tag @user.photo, class: "w-20 h-20 md:w-40 md:h-40 object-cover rounded-full p-1"
           - else
               img.w-20.h-20.md:w-40.md:h-40.object-cover.rounded-full.p-1[src="https://images-na.ssl-images-amazon.com/images/I/51e6kpkyuIL._AC_SL1200_.jpg" alt="profile"]
 
       .w-8/12.md:w-7/12.ml-4
         .md:flex.md:flex-wrap.md:items-center.mb-4
           h2.text-3xl.inline-block.font-light.md:mr-2.mb-2.sm:mb-0
-            = current_user.username
+            = @user.username
 
-          = link_to edit_user_registration_path, class: "border border-gray-300 ml-3 px-2 py-1 font-medium text-sm rounded block text-center sm:inline-block block"
-            | Edit Profile
+          - if @user == current_user
+            = link_to edit_user_registration_path, class: "border border-gray-300 ml-3 px-2 py-1 font-medium text-sm rounded block text-center sm:inline-block block"
+              | Edit Profile
+          - else
+            button.bg-blue-500.text-white.p-1.rounded-md.text-sm.focus:outline-none [id="follow_button" data-reflex="click->Follow#change_follow" data-user-id="#{@user.id}"]
+              - if current_user.followings.exists?(@user.id)
+                | Following
+              - else
+                | Follow
 
           a[href="#"]
             div[style="font-size: 1.5rem;" class="ml-3 hover:border-none"]
@@ -26,24 +33,24 @@
         ul.hidden.md:flex.space-x-8.mb-4
           li
             span.font-semibold
-              = current_user.posts.count
+              = @user.posts.count
             |  posts
           li
             span.font-semibold
-              = current_user.followers.count
+              = @user.followers.count
             |  followers
           li
             span.font-semibold
-              = current_user.followings.count
+              = @user.followings.count
             |  following
         .hidden.md:block
           h1.font-semibold
-            = current_user.name
+            = @user.name
           span
-            = current_user.bio
+            = @user.bio
           br
           a.text-blue-800.font-semibold[href="#"]
-            = current_user.website
+            = @user.website
 
     .container [data-reflex-permanent id="id_container" x-data=("{ tab: window.location.hash ? window.location.hash.substring(1) : 'posts' }")]
       .px-px.md:px-3
@@ -72,7 +79,7 @@
         .content
           div x-show=("tab === 'posts'")
             .flex.flex-wrap.-mx-px.md:-mx-3.mt-3
-              - current_user.posts.each do |post|
+              - @user.posts.each do |post|
                 = render partial: "profile/posts/post", locals: {post:post}
 
           div x-show=("tab === 'igtv'")

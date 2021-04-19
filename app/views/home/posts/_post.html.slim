@@ -4,14 +4,15 @@
       .flex.p-4
         .rounded-full.h-8.w-8.bg-gray-500.flex.items-center.justify-center.overflow-hidden
 
-          a[href="#"]
+          / = link_to "", /users/:id(.:format)
+          a[href="#{user_path(post.user)}"]
             - if post.user.photo.attached?
               = image_tag post.user.photo
             - else
               img[src="https://images-na.ssl-images-amazon.com/images/I/51e6kpkyuIL._AC_SL1200_.jpg" alt="profile"]
 
 
-        span.pt-1.ml-2.font-bold.text-sm
+        a.pt-1.ml-2.font-bold.text-sm [href="#{user_path(post.user)}"]
           = post.user.name
       span.hover:bg-gray-300.cursor-pointer.rounded.p-4
         i.fas.fa-ellipsis-h.pt-2.text-lg

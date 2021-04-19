@@ -8,6 +8,7 @@ class LikeReflex < ApplicationReflex
     @icon = false
 
     if user_like.nil?
+      post.like_posts.create(user:user)
       @icon = true
     else
       LikePost.delete(user_like)
